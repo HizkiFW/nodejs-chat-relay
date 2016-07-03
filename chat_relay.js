@@ -14,6 +14,7 @@ var ChatRelay = {
 		init: function() {
 			var WebSocketServer = ChatRelay.I.ws.Server;
 			ChatRelay.WS.wss = new WebSocketServer({port: (process.env.PORT || 5000)});
+			console.log("Starting WS Server on port " + (process.env.PORT || 5000));
 			ChatRelay.WS.wss.on('connection', function connection(ws) {
 				ws.on('message', function incoming(msg) {
 					console.log("WS msg: " + msg);
@@ -47,6 +48,7 @@ var ChatRelay = {
 	init: function() {
 		ChatRelay.WS.init();
 		
+		console.log("ChatRelay ready");
 		ChatRelay.ready = true;
 	}
 };
