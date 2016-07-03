@@ -8,15 +8,30 @@
 			}
 		</style>
 		<script>
-			var websocket;
+			var websocket,
+				welcomeMsg = false;
 			
 			$(function() {
+				setupWS();
+				
+				$("#input").on("keydown", function(e) {
+					if(e.keyCode == 13) {
+						websocket.send($("#name").val() + ":" + $("#input").val());
+						$("#input").val("");
+					}
+				});
+			});
+			
+			function setupWS() {
 				websocket = new WebSocket("wss://securechat-relay.herokuapp.com/");
 				websocket.onopen = function(evt) {
-					addMsg("<b>Connection to server established</b>");
+					if(!welcomeMsg) {
+						welcomeMsg = true;
+						addMsg("<b>Connection to server established</b>");
+					}
 				};
 				websocket.onclose = function(evt) {
-					addMsg("<b>Connection closed.</b>");
+					setTimeout(setupWS, 1000);
 				};
 				websocket.onmessage = function(evt) {
 					if(evt.data !== "ping") {
@@ -28,14 +43,7 @@
 				websocket.onerror = function(evt) {
 					addMsg("<b>An error has occurred</b>");
 				};
-				
-				$("#input").on("keydown", function(e) {
-					if(e.keyCode == 13) {
-						websocket.send($("#name").val() + ":" + $("#input").val());
-						$("#input").val("");
-					}
-				});
-			});
+			}
 			
 			function addMsg(html) {
 				$("#chat").append("<div>" + html + "</div>");
