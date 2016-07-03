@@ -19,9 +19,11 @@
 					addMsg("<b>Connection closed.</b>");
 				};
 				websocket.onmessage = function(evt) {
-					var uname = evt.data.split(":")[0],
-						msg = evt.data.substring(uname.length + 1);
-					addMsg("<b>" + uname + ":</b> " + msg);
+					if(evt.data !== "ping") {
+						var uname = evt.data.split(":")[0],
+							msg = evt.data.substring(uname.length + 1);
+						addMsg("<b>" + uname + ":</b> " + msg);
+					}
 				};
 				websocket.onerror = function(evt) {
 					addMsg("<b>An error has occurred</b>");
@@ -53,6 +55,7 @@
 				<h1>securechat-relay</h1>
 				<p>Not secure at the moment, but chat works.</p>
 				<a type="button" class="btn btn-lg btn-primary" href="#chat"><span class="glyphicon glyphicon-user"></span> Start chatting</a>
+				<a type="button" class="btn btn-lg btn-default" href="https://github.com/HizkiFW/nodejs-chat-relay"><span class="glyphicon glyphicon-link"></span> Source code</a>
 			</div>
 		</div>
 		<div class="container">

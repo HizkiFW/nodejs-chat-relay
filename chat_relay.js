@@ -18,7 +18,7 @@ app.get('/', function(request, response) {
 app.ws('/', function(ws, req) {
 	ws.on('message', function(msg) {
 		console.log('WS msg: ' + msg);
-		ws.send(msg);
+		bc(msg);
 	});
 	console.log('WS connect');
 	ws.send('Connected');
@@ -30,6 +30,10 @@ function bc(msg) {
 		client.send(msg);
 	});
 }
+
+setTimeout(function() {
+	bs("ping");
+}, 10000);
 
 app.listen(app.get('port'), function() {
 	console.log('Webserver running on port ', app.get('port'));
