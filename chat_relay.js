@@ -32,7 +32,7 @@ function bc(msg) {
 }
 
 setTimeout(function() {
-	bs("ping");
+	bc("ping");
 }, 10000);
 
 app.listen(app.get('port'), function() {
