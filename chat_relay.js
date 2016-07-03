@@ -1,7 +1,7 @@
 /*
 NodeJS Chat Relay
 */
-/*
+
 var ChatRelay = {
 	ready: false,
 	I: {
@@ -41,8 +41,6 @@ var ChatRelay = {
 	}
 };
 
-ChatRelay.init();
-
 /*----------------------------------------------------------------*/
 
 console.log('Attempting to start webserver');
@@ -65,4 +63,6 @@ app.listen(app.get('port'), function() {
   console.log('Webserver running on port ', app.get('port'));
 });
 
+/*----------------------------------------------------------------*/
 
+ChatRelay.init();
