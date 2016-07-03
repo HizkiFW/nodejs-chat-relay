@@ -29,7 +29,7 @@ var ChatRelay = {
 							var idx = ChatRelay.Rooms.indexOf(ws);
 							if(idx)
 								ChatRelay.Rooms.splice(idx, 1);
-						}
+						} else ws.send("Unknown command");
 					}
 				});
 				if(ChatRelay.ready)
