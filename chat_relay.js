@@ -21,8 +21,11 @@ var ChatRelay = {
 					if(ChatRelay.ready) {
 						if(msg.startsWith('chat ')) {
 							var idx = ChatRelay.Rooms.indexOf(ws);
-							if(idx)
-								ChatRelay.WS.wss.broadcast('chat ' + user + ' ' + msg);
+							if(idx){
+								for(var w in ChatRelay.Rooms) {
+									w.send('chat ' + msg);
+								}
+							}
 						} else if(msg.startsWith('join ')) {
 							ChatRelay.Rooms[ws] = msg.substring(5);
 						} else if(msg == 'leave') {
