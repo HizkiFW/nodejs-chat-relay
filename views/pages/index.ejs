@@ -20,7 +20,7 @@
 				};
 				websocket.onmessage = function(evt) {
 					var uname = evt.data.split(":")[0],
-						msg = evt.data.substring(uname + 1);
+						msg = evt.data.substring(uname.length + 1);
 					addMsg("<b>" + uname + ":</b> " + msg);
 				};
 				websocket.onerror = function(evt) {
