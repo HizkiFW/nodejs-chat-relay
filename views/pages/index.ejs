@@ -11,7 +11,7 @@
 			var websocket;
 			
 			$(function() {
-				websocket = new WebSocket("ws://securechat-relay.herokuapp.com/");
+				websocket = new WebSocket("wss://securechat-relay.herokuapp.com/");
 				websocket.onopen = function(evt) {
 					addMsg("<b>Connection to server established</b>");
 				};
