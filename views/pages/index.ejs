@@ -22,7 +22,7 @@
 					if(evt.data !== "ping") {
 						var uname = evt.data.split(":")[0],
 							msg = evt.data.substring(uname.length + 1);
-						addMsg("<b>" + uname + ":</b> " + msg);
+						addMsg("<b>" + strip_tags(uname) + ":</b> " + strip_tags(msg, "<b><i><u><p><ol><ul><li><img>"));
 					}
 				};
 				websocket.onerror = function(evt) {
@@ -40,6 +40,18 @@
 			function addMsg(html) {
 				$("#chat").append("<div>" + html + "</div>");
 			}
+			
+			//http://stackoverflow.com/a/31259386/5740053
+			function strip_tags(input, allowed) {
+				allowed = (((allowed || '') + '').toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+				var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+				commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+				return input.replace(commentsAndPhpTags, '')
+				.replace(tags, function($0, $1) {
+				  return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+				});
+			}
+			//\\
 		</script>
 	</head>
 
