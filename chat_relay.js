@@ -5,7 +5,6 @@ NodeJS Chat Relay
 var ChatRelay = {
 	ready: false,
 	I: {
-		http: require('http'),
 		ws: require('ws')
 	},
 	Rooms: {},

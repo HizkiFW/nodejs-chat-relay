@@ -10,8 +10,7 @@
     "start": "node chat_relay.js"
   },
   "dependencies": {
-    "ejs": "2.4.1",
-    "express": "4.13.3"
+    "ws": "1.1.1"
   },
   "repository": {
     "type": "git",
