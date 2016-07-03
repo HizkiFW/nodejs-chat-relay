@@ -51,4 +51,4 @@ var ChatRelay = {
 	}
 };
 
-ChaatRelay.init();
+ChatRelay.init();
