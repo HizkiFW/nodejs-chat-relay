@@ -7,7 +7,6 @@ var ChatRelay = {
 	I: {
 		ws: require('ws')
 	},
-	Rooms: {},
 	
 	WS: {
 		wss: null,
@@ -18,20 +17,8 @@ var ChatRelay = {
 			ChatRelay.WS.wss.on('connection', function connection(ws) {
 				ws.on('message', function incoming(msg) {
 					console.log("WS msg: " + msg);
-					if(ChatRelay.ready) {
-						if(msg.startsWith('chat ')) {
-							if(typeof ChatRelay.Rooms[ws] !== "undefined"){
-								for(var w in ChatRelay.Rooms) {
-									w.send('chat ' + msg);
-								}
-							}
-						} else if(msg.startsWith('join ')) {
-							ChatRelay.Rooms[ws] = msg.substring(5);
-						} else if(msg == 'leave') {
-							if(typeof ChatRelay.Rooms[ws] !== "undefined")
-								ChatRelay.Rooms[idx];
-						} else ws.send("Unknown command");
-					}
+					if(ChatRelay.ready)
+						ChatRelay.WS.wss.broadcast(msg);
 				});
 				if(ChatRelay.ready)
 					ws.send("Connected");
