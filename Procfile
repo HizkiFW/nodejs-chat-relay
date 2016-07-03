@@ -1,1 +1,1 @@
-web: node chat_relay.js
+api: node chat_relay.js
