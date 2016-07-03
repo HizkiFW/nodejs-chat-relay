@@ -21,6 +21,7 @@ app.ws('/', function(ws, req) {
 		ws.send(msg);
 	});
 	console.log('WS connect');
+	ws.send('Connected');
 });
 var aWss = expressWs.getWss('/');
 
