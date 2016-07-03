@@ -20,8 +20,7 @@ var ChatRelay = {
 					console.log("WS msg: " + msg);
 					if(ChatRelay.ready) {
 						if(msg.startsWith('chat ')) {
-							var idx = ChatRelay.Rooms.indexOf(ws);
-							if(idx){
+							if(typeof ChatRelay.Rooms[ws] !== "undefined"){
 								for(var w in ChatRelay.Rooms) {
 									w.send('chat ' + msg);
 								}
@@ -29,9 +28,8 @@ var ChatRelay = {
 						} else if(msg.startsWith('join ')) {
 							ChatRelay.Rooms[ws] = msg.substring(5);
 						} else if(msg == 'leave') {
-							var idx = ChatRelay.Rooms.indexOf(ws);
-							if(idx)
-								ChatRelay.Rooms.splice(idx, 1);
+							if(typeof ChatRelay.Rooms[ws] !== "undefined")
+								ChatRelay.Rooms[idx];
 						} else ws.send("Unknown command");
 					}
 				});
