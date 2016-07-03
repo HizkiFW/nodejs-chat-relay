@@ -45,6 +45,7 @@ ChatRelay.init();
 
 /*----------------------------------------------------------------*/
 
+console.log('Attempting to start webserver');
 var express = require('express');
 var app = express();
 
